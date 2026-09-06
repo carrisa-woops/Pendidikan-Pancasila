@@ -1,68 +1,497 @@
 ```html
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Tugas PKn: Mengamalkan Nilai Pancasila</title>
+
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* Background website */
+    body {
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    /* Panel editor */
+    #editorPanel {
+      transition: all 0.3s ease;
+    }
+
+    .editor-input {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .editor-input:focus {
+      border-color: #ef4444;
+      box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.15);
+    }
+  </style>
 </head>
+
 
 <body class="bg-slate-50 text-slate-800 font-sans antialiased">
 
+
+  <!-- =========================
+       TOMBOL EDIT
+  ========================== -->
+
+  <button
+    onclick="bukaEditor()"
+    class="fixed bottom-6 right-6 z-[100] bg-red-600 text-white w-14 h-14 rounded-full shadow-lg hover:bg-red-700 transition text-xl"
+    title="Edit Website">
+
+    ⚙️
+
+  </button>
+
+
+  <!-- =========================
+       PANEL EDITOR
+  ========================== -->
+
+  <div
+    id="editorPanel"
+    class="fixed top-0 right-0 z-[99] w-full sm:w-[380px] h-full bg-white shadow-2xl translate-x-full overflow-y-auto">
+
+    <div class="p-5">
+
+      <!-- Header panel -->
+
+      <div class="flex justify-between items-center border-b pb-4 mb-5">
+
+        <div>
+          <h2 class="text-xl font-bold text-slate-900">
+            Edit Website
+          </h2>
+
+          <p class="text-xs text-slate-500">
+            Perubahan tersimpan otomatis
+          </p>
+        </div>
+
+        <button
+          onclick="tutupEditor()"
+          class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200">
+
+          ✕
+
+        </button>
+
+      </div>
+
+
+      <!-- =========================
+           TEMA
+      ========================== -->
+
+      <h3 class="font-bold text-slate-800 mb-3">
+        🎨 Tampilan
+      </h3>
+
+
+      <label class="text-sm font-medium">
+        Warna Tema
+      </label>
+
+      <input
+        type="color"
+        id="warnaTema"
+        class="w-full h-10 cursor-pointer mb-4"
+        onchange="ubahWarna()">
+
+
+      <label class="text-sm font-medium">
+        Background Website
+      </label>
+
+      <input
+        type="file"
+        id="backgroundInput"
+        accept="image/*"
+        class="editor-input mb-4"
+        onchange="ubahBackground(event)">
+
+
+      <button
+        onclick="hapusBackground()"
+        class="w-full bg-slate-100 hover:bg-slate-200 py-2 rounded-lg text-sm mb-6">
+
+        Hapus Background
+
+      </button>
+
+
+      <!-- =========================
+           HERO
+      ========================== -->
+
+      <h3 class="font-bold text-slate-800 mb-3">
+        🏠 Bagian Utama
+      </h3>
+
+
+      <label class="text-sm font-medium">
+        Judul
+      </label>
+
+      <input
+        type="text"
+        id="judulInput"
+        class="editor-input mb-3"
+        oninput="ubahJudul()">
+
+
+      <label class="text-sm font-medium">
+        Deskripsi
+      </label>
+
+      <textarea
+        id="deskripsiInput"
+        rows="4"
+        class="editor-input mb-3"
+        oninput="ubahDeskripsi()"></textarea>
+
+
+      <label class="text-sm font-medium">
+        Background Hero
+      </label>
+
+      <input
+        type="file"
+        id="heroInput"
+        accept="image/*"
+        class="editor-input mb-6"
+        onchange="ubahHero(event)">
+
+
+      <!-- =========================
+           MATERI
+      ========================== -->
+
+      <h3 class="font-bold text-slate-800 mb-3">
+        📚 Materi
+      </h3>
+
+
+      <label class="text-sm font-medium">
+        Judul Materi
+      </label>
+
+      <input
+        type="text"
+        id="materiJudulInput"
+        class="editor-input mb-6"
+        oninput="ubahMateriJudul()">
+
+
+      <!-- =========================
+           ANGGOTA
+      ========================== -->
+
+      <h3 class="font-bold text-slate-800 mb-3">
+        👥 Anggota Kelompok
+      </h3>
+
+
+      <!-- Anggota 1 -->
+
+      <div class="border rounded-xl p-3 mb-3">
+
+        <p class="font-semibold text-sm mb-2">
+          Anggota 1
+        </p>
+
+        <input
+          type="text"
+          id="nama1Input"
+          class="editor-input mb-2"
+          placeholder="Nama"
+          oninput="ubahNama(1)">
+
+        <input
+          type="text"
+          id="absen1Input"
+          class="editor-input mb-2"
+          placeholder="NIS / No. Absen"
+          oninput="ubahAbsen(1)">
+
+        <input
+          type="file"
+          accept="image/*"
+          class="editor-input"
+          onchange="ubahFoto(event, 1)">
+
+      </div>
+
+
+      <!-- Anggota 2 -->
+
+      <div class="border rounded-xl p-3 mb-3">
+
+        <p class="font-semibold text-sm mb-2">
+          Anggota 2
+        </p>
+
+        <input
+          type="text"
+          id="nama2Input"
+          class="editor-input mb-2"
+          placeholder="Nama"
+          oninput="ubahNama(2)">
+
+        <input
+          type="text"
+          id="absen2Input"
+          class="editor-input mb-2"
+          placeholder="NIS / No. Absen"
+          oninput="ubahAbsen(2)">
+
+        <input
+          type="file"
+          accept="image/*"
+          class="editor-input"
+          onchange="ubahFoto(event, 2)">
+
+      </div>
+
+
+      <!-- Anggota 3 -->
+
+      <div class="border rounded-xl p-3 mb-3">
+
+        <p class="font-semibold text-sm mb-2">
+          Anggota 3
+        </p>
+
+        <input
+          type="text"
+          id="nama3Input"
+          class="editor-input mb-2"
+          placeholder="Nama"
+          oninput="ubahNama(3)">
+
+        <input
+          type="text"
+          id="absen3Input"
+          class="editor-input mb-2"
+          placeholder="NIS / No. Absen"
+          oninput="ubahAbsen(3)">
+
+        <input
+          type="file"
+          accept="image/*"
+          class="editor-input"
+          onchange="ubahFoto(event, 3)">
+
+      </div>
+
+
+      <!-- Anggota 4 -->
+
+      <div class="border rounded-xl p-3 mb-3">
+
+        <p class="font-semibold text-sm mb-2">
+          Anggota 4
+        </p>
+
+        <input
+          type="text"
+          id="nama4Input"
+          class="editor-input mb-2"
+          placeholder="Nama"
+          oninput="ubahNama(4)">
+
+        <input
+          type="text"
+          id="absen4Input"
+          class="editor-input mb-2"
+          placeholder="NIS / No. Absen"
+          oninput="ubahAbsen(4)">
+
+        <input
+          type="file"
+          accept="image/*"
+          class="editor-input"
+          onchange="ubahFoto(event, 4)">
+
+      </div>
+
+
+      <!-- Anggota 5 -->
+
+      <div class="border rounded-xl p-3 mb-3">
+
+        <p class="font-semibold text-sm mb-2">
+          Anggota 5
+        </p>
+
+        <input
+          type="text"
+          id="nama5Input"
+          class="editor-input mb-2"
+          placeholder="Nama"
+          oninput="ubahNama(5)">
+
+        <input
+          type="text"
+          id="absen5Input"
+          class="editor-input mb-2"
+          placeholder="NIS / No. Absen"
+          oninput="ubahAbsen(5)">
+
+        <input
+          type="file"
+          accept="image/*"
+          class="editor-input"
+          onchange="ubahFoto(event, 5)">
+
+      </div>
+
+
+      <!-- =========================
+           RESET
+      ========================== -->
+
+      <button
+        onclick="resetWebsite()"
+        class="w-full bg-red-600 text-white py-3 rounded-lg hover:bg-red-700 transition mt-4">
+
+        🔄 Reset Semua Perubahan
+
+      </button>
+
+
+      <p class="text-xs text-slate-400 text-center mt-3 mb-6">
+        Foto dan pengaturan disimpan di browser ini.
+      </p>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =========================
+       HEADER
+  ========================== -->
+
   <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-100">
+
     <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
-      <span class="font-bold text-lg text-red-600 tracking-wide">PKN EDU</span>
+
+      <span class="font-bold text-lg text-red-600 tracking-wide">
+        PKN EDU
+      </span>
 
       <nav class="space-x-6 text-sm font-medium">
-        <a href="#materi" class="hover:text-red-600 transition-colors">Materi</a>
-        <a href="#studi-kasus" class="hover:text-red-600 transition-colors">Implementasi</a>
-        <a href="#anggota" class="hover:text-red-600 transition-colors">Kelompok</a>
+
+        <a href="#materi" class="hover:text-red-600 transition-colors">
+          Materi
+        </a>
+
+        <a href="#studi-kasus" class="hover:text-red-600 transition-colors">
+          Implementasi
+        </a>
+
+        <a href="#anggota" class="hover:text-red-600 transition-colors">
+          Kelompok
+        </a>
+
       </nav>
+
     </div>
+
   </header>
 
 
-  <!-- HERO -->
-  <section class="max-w-5xl mx-auto px-6 py-16 md:py-24 text-center">
+
+  <!-- =========================
+       HERO
+  ========================== -->
+
+  <section
+    id="hero"
+    class="max-w-5xl mx-auto px-6 py-16 md:py-24 text-center">
 
     <span class="inline-block bg-red-100 text-red-700 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider mb-4">
+
       Tugas Pendidikan Kewarganegaraan
+
     </span>
 
-    <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 leading-tight mb-4">
+
+    <h1
+      id="judulWebsite"
+      class="text-3xl md:text-5xl font-extrabold text-slate-900 leading-tight mb-4">
+
       Revitalisasi Nilai Pancasila di Era Digital
+
     </h1>
 
-    <p class="max-w-2xl mx-auto text-slate-600 text-base md:text-lg mb-8">
+
+    <p
+      id="deskripsiWebsite"
+      class="max-w-2xl mx-auto text-slate-600 text-base md:text-lg mb-8">
+
       Menjaga integritas, toleransi, dan persatuan bangsa melalui penerapan sila-sila Pancasila dalam interaksi daring maupun luring.
+
     </p>
 
-    <a href="#materi"
+
+    <a
+      href="#materi"
       class="inline-block bg-red-600 text-white font-medium px-6 py-3 rounded-lg shadow hover:bg-red-700 transition">
+
       Pelajari Selengkapnya
+
     </a>
 
   </section>
 
 
-  <!-- MATERI -->
+
+  <!-- =========================
+       MATERI
+  ========================== -->
+
   <section id="materi" class="max-w-5xl mx-auto px-6 py-12">
 
     <div class="border-b pb-4 mb-8">
-      <h2 class="text-2xl font-bold text-slate-900">
+
+      <h2
+        id="materiJudul"
+        class="text-2xl font-bold text-slate-900">
+
         Pilar Utama Nilai PKn
+
       </h2>
 
       <p class="text-slate-500 text-sm">
+
         Prinsip dasar pembentukan karakter warga negara yang bertanggung jawab.
+
       </p>
+
     </div>
 
 
     <div class="grid md:grid-cols-3 gap-6">
 
+
       <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+
         <div class="w-10 h-10 rounded-lg bg-red-100 text-red-600 flex items-center justify-center font-bold mb-4">
           1
         </div>
@@ -72,12 +501,16 @@
         </h3>
 
         <p class="text-slate-600 text-sm leading-relaxed">
+
           Mengimplementasikan Sila Pertama dengan menghargai kebebasan beribadah dan membangun ruang dialog damai antarkeyakinan.
+
         </p>
+
       </div>
 
 
       <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+
         <div class="w-10 h-10 rounded-lg bg-red-100 text-red-600 flex items-center justify-center font-bold mb-4">
           2
         </div>
@@ -87,12 +520,16 @@
         </h3>
 
         <p class="text-slate-600 text-sm leading-relaxed">
+
           Mencegah penyebaran hoaks, menjaga adab bermedia sosial, dan memperlakukan sesama warganet secara adil dan beradab.
+
         </p>
+
       </div>
 
 
       <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+
         <div class="w-10 h-10 rounded-lg bg-red-100 text-red-600 flex items-center justify-center font-bold mb-4">
           3
         </div>
@@ -102,8 +539,11 @@
         </h3>
 
         <p class="text-slate-600 text-sm leading-relaxed">
+
           Menggalang kepedulian sosial melalui aksi kolektif, urun daya digital, dan gerakan kepedulian lingkungan hidup.
+
         </p>
+
       </div>
 
     </div>
@@ -111,7 +551,11 @@
   </section>
 
 
-  <!-- STUDI KASUS -->
+
+  <!-- =========================
+       STUDI KASUS
+  ========================== -->
+
   <section id="studi-kasus" class="bg-slate-100 py-12">
 
     <div class="max-w-5xl mx-auto px-6">
@@ -119,11 +563,15 @@
       <div class="border-b border-slate-200 pb-4 mb-6">
 
         <h2 class="text-2xl font-bold text-slate-900">
+
           Analisis Studi Kasus Singkat
+
         </h2>
 
         <p class="text-slate-500 text-sm">
+
           Contoh penerapan solusi berbasis nilai kewarganegaraan.
+
         </p>
 
       </div>
@@ -132,15 +580,18 @@
       <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
 
         <h4 class="font-semibold text-slate-800">
+
           Tantangan: Polarisasi Opini di Media Sosial
+
         </h4>
 
         <p class="text-slate-600 text-sm leading-relaxed">
+
           Perbedaan pandangan politik sering kali memicu perpecahan online.
           Solusi kewarganegaraan berfokus pada penguatan
           <em>literasi digital</em> berbasis Sila Ketiga (Persatuan Indonesia),
-          di mana setiap individu mengedepankan verifikasi data dan komunikasi
-          tanpa ujaran kebencian.
+          di mana setiap individu mengedepankan verifikasi data dan komunikasi tanpa ujaran kebencian.
+
         </p>
 
       </div>
@@ -150,7 +601,11 @@
   </section>
 
 
-  <!-- ANGGOTA -->
+
+  <!-- =========================
+       ANGGOTA
+  ========================== -->
+
   <section id="anggota" class="max-w-5xl mx-auto px-6 py-12">
 
     <div class="border-b pb-4 mb-8">
@@ -170,165 +625,154 @@
 
 
       <!-- ARIF -->
+
       <div class="p-4 rounded-lg bg-white border border-slate-200 shadow-sm">
 
-        <img id="foto1"
+        <img
+          id="foto1"
           class="w-24 h-24 mx-auto mb-3 rounded-full object-cover border-4 border-red-100 hidden">
 
-        <div class="mb-3">
-          <label for="inputFoto1"
-            class="cursor-pointer inline-block bg-red-100 text-red-600 px-3 py-2 rounded-lg text-xs font-medium hover:bg-red-200 transition">
-            📷 Tambah Foto
-          </label>
+        <p
+          id="nama1"
+          class="font-bold text-slate-800 text-sm">
 
-          <input
-            type="file"
-            id="inputFoto1"
-            accept="image/*"
-            class="hidden"
-            onchange="tampilkanFoto(event, 'foto1')">
-        </div>
-
-        <p class="font-bold text-slate-800 text-sm">
           Arif Rohman
+
         </p>
 
-        <span class="text-xs text-slate-500">
+        <span
+          id="absen1"
+          class="text-xs text-slate-500">
+
           NIS / No. Absen 07
+
         </span>
 
       </div>
+
 
 
       <!-- AZYUAN -->
+
       <div class="p-4 rounded-lg bg-white border border-slate-200 shadow-sm">
 
-        <img id="foto2"
+        <img
+          id="foto2"
           class="w-24 h-24 mx-auto mb-3 rounded-full object-cover border-4 border-red-100 hidden">
 
-        <div class="mb-3">
-          <label for="inputFoto2"
-            class="cursor-pointer inline-block bg-red-100 text-red-600 px-3 py-2 rounded-lg text-xs font-medium hover:bg-red-200 transition">
-            📷 Tambah Foto
-          </label>
+        <p
+          id="nama2"
+          class="font-bold text-slate-800 text-sm">
 
-          <input
-            type="file"
-            id="inputFoto2"
-            accept="image/*"
-            class="hidden"
-            onchange="tampilkanFoto(event, 'foto2')">
-        </div>
-
-        <p class="font-bold text-slate-800 text-sm">
           Azyuan Syahril
+
         </p>
 
-        <span class="text-xs text-slate-500">
+        <span
+          id="absen2"
+          class="text-xs text-slate-500">
+
           NIS / No. Absen 10
+
         </span>
 
       </div>
+
 
 
       <!-- BRILIAN -->
+
       <div class="p-4 rounded-lg bg-white border border-slate-200 shadow-sm">
 
-        <img id="foto3"
+        <img
+          id="foto3"
           class="w-24 h-24 mx-auto mb-3 rounded-full object-cover border-4 border-red-100 hidden">
 
-        <div class="mb-3">
-          <label for="inputFoto3"
-            class="cursor-pointer inline-block bg-red-100 text-red-600 px-3 py-2 rounded-lg text-xs font-medium hover:bg-red-200 transition">
-            📷 Tambah Foto
-          </label>
+        <p
+          id="nama3"
+          class="font-bold text-slate-800 text-sm">
 
-          <input
-            type="file"
-            id="inputFoto3"
-            accept="image/*"
-            class="hidden"
-            onchange="tampilkanFoto(event, 'foto3')">
-        </div>
-
-        <p class="font-bold text-slate-800 text-sm">
           Brilian zaki
+
         </p>
 
-        <span class="text-xs text-slate-500">
+        <span
+          id="absen3"
+          class="text-xs text-slate-500">
+
           NIS / No. Absen 12
+
         </span>
 
       </div>
+
 
 
       <!-- CARRISA -->
+
       <div class="p-4 rounded-lg bg-white border border-slate-200 shadow-sm">
 
-        <img id="foto4"
+        <img
+          id="foto4"
           class="w-24 h-24 mx-auto mb-3 rounded-full object-cover border-4 border-red-100 hidden">
 
-        <div class="mb-3">
-          <label for="inputFoto4"
-            class="cursor-pointer inline-block bg-red-100 text-red-600 px-3 py-2 rounded-lg text-xs font-medium hover:bg-red-200 transition">
-            📷 Tambah Foto
-          </label>
+        <p
+          id="nama4"
+          class="font-bold text-slate-800 text-sm">
 
-          <input
-            type="file"
-            id="inputFoto4"
-            accept="image/*"
-            class="hidden"
-            onchange="tampilkanFoto(event, 'foto4')">
-        </div>
-
-        <p class="font-bold text-slate-800 text-sm">
           Carrisa Zaynah A.
+
         </p>
 
-        <span class="text-xs text-slate-500">
+        <span
+          id="absen4"
+          class="text-xs text-slate-500">
+
           NIS / No. Absen 13
+
         </span>
 
       </div>
+
 
 
       <!-- NISA -->
+
       <div class="p-4 rounded-lg bg-white border border-slate-200 shadow-sm">
 
-        <img id="foto5"
+        <img
+          id="foto5"
           class="w-24 h-24 mx-auto mb-3 rounded-full object-cover border-4 border-red-100 hidden">
 
-        <div class="mb-3">
-          <label for="inputFoto5"
-            class="cursor-pointer inline-block bg-red-100 text-red-600 px-3 py-2 rounded-lg text-xs font-medium hover:bg-red-200 transition">
-            📷 Tambah Foto
-          </label>
+        <p
+          id="nama5"
+          class="font-bold text-slate-800 text-sm">
 
-          <input
-            type="file"
-            id="inputFoto5"
-            accept="image/*"
-            class="hidden"
-            onchange="tampilkanFoto(event, 'foto5')">
-        </div>
-
-        <p class="font-bold text-slate-800 text-sm">
           Nisa Maesaroh
+
         </p>
 
-        <span class="text-xs text-slate-500">
+        <span
+          id="absen5"
+          class="text-xs text-slate-500">
+
           NIS / No. Absen 30
+
         </span>
 
       </div>
+
 
     </div>
 
   </section>
 
 
-  <!-- FOOTER -->
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
   <footer class="bg-slate-900 text-slate-400 py-6 text-center text-xs">
 
     <p>
@@ -339,33 +783,529 @@
   </footer>
 
 
-  <!-- JAVASCRIPT UNTUK MENAMPILKAN FOTO -->
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+
   <script>
 
-    function tampilkanFoto(event, idFoto) {
+    /*
+      DATA DEFAULT
+      Nama-nama tetap menggunakan data awal
+    */
 
-      const file = event.target.files[0];
+    const dataDefault = {
 
-      if (file) {
+      judul:
+        "Revitalisasi Nilai Pancasila di Era Digital",
 
-        // Mengecek apakah file benar-benar gambar
-        if (!file.type.startsWith("image/")) {
-          alert("Silakan pilih file berupa gambar.");
-          return;
+      deskripsi:
+        "Menjaga integritas, toleransi, dan persatuan bangsa melalui penerapan sila-sila Pancasila dalam interaksi daring maupun luring.",
+
+      materiJudul:
+        "Pilar Utama Nilai PKn",
+
+      warna:
+        "#ef4444",
+
+      nama1:
+        "Arif Rohman",
+
+      absen1:
+        "NIS / No. Absen 07",
+
+      nama2:
+        "Azyuan Syahril",
+
+      absen2:
+        "NIS / No. Absen 10",
+
+      nama3:
+        "Brilian zaki",
+
+      absen3:
+        "NIS / No. Absen 12",
+
+      nama4:
+        "Carrisa Zaynah A.",
+
+      absen4:
+        "NIS / No. Absen 13",
+
+      nama5:
+        "Nisa Maesaroh",
+
+      absen5:
+        "NIS / No. Absen 30"
+
+    };
+
+
+    /*
+      AMBIL DATA DARI LOCAL STORAGE
+    */
+
+    let data = JSON.parse(
+      localStorage.getItem("websitePKN")
+    ) || dataDefault;
+
+
+    /*
+      SIMPAN DATA
+    */
+
+    function simpan() {
+
+      localStorage.setItem(
+        "websitePKN",
+        JSON.stringify(data)
+      );
+
+    }
+
+
+    /*
+      BUKA EDITOR
+    */
+
+    function bukaEditor() {
+
+      document
+        .getElementById("editorPanel")
+        .classList.remove("translate-x-full");
+
+    }
+
+
+    /*
+      TUTUP EDITOR
+    */
+
+    function tutupEditor() {
+
+      document
+        .getElementById("editorPanel")
+        .classList.add("translate-x-full");
+
+    }
+
+
+    /*
+      UBAH JUDUL
+    */
+
+    function ubahJudul() {
+
+      data.judul =
+        document.getElementById("judulInput").value;
+
+      document.getElementById("judulWebsite")
+        .innerText = data.judul;
+
+      simpan();
+
+    }
+
+
+    /*
+      UBAH DESKRIPSI
+    */
+
+    function ubahDeskripsi() {
+
+      data.deskripsi =
+        document.getElementById("deskripsiInput").value;
+
+      document.getElementById("deskripsiWebsite")
+        .innerText = data.deskripsi;
+
+      simpan();
+
+    }
+
+
+    /*
+      UBAH JUDUL MATERI
+    */
+
+    function ubahMateriJudul() {
+
+      data.materiJudul =
+        document.getElementById("materiJudulInput").value;
+
+      document.getElementById("materiJudul")
+        .innerText = data.materiJudul;
+
+      simpan();
+
+    }
+
+
+    /*
+      UBAH NAMA
+    */
+
+    function ubahNama(nomor) {
+
+      data["nama" + nomor] =
+        document.getElementById(
+          "nama" + nomor + "Input"
+        ).value;
+
+      document.getElementById(
+        "nama" + nomor
+      ).innerText =
+        data["nama" + nomor];
+
+      simpan();
+
+    }
+
+
+    /*
+      UBAH ABSEN
+    */
+
+    function ubahAbsen(nomor) {
+
+      data["absen" + nomor] =
+        document.getElementById(
+          "absen" + nomor + "Input"
+        ).value;
+
+      document.getElementById(
+        "absen" + nomor
+      ).innerText =
+        data["absen" + nomor];
+
+      simpan();
+
+    }
+
+
+    /*
+      UBAH WARNA TEMA
+    */
+
+    function ubahWarna() {
+
+      data.warna =
+        document.getElementById("warnaTema").value;
+
+      document.documentElement.style
+        .setProperty(
+          "--warna-tema",
+          data.warna
+        );
+
+      /*
+        Ganti warna tombol merah
+      */
+
+      document.querySelectorAll(
+        ".bg-red-600"
+      ).forEach(element => {
+
+        element.style.backgroundColor =
+          data.warna;
+
+      });
+
+
+      simpan();
+
+    }
+
+
+    /*
+      UBAH BACKGROUND WEBSITE
+    */
+
+    function ubahBackground(event) {
+
+      const file =
+        event.target.files[0];
+
+      if (!file) return;
+
+      const reader =
+        new FileReader();
+
+      reader.onload = function(e) {
+
+        data.background =
+          e.target.result;
+
+        document.body.style.backgroundImage =
+          `url("${data.background}")`;
+
+        simpan();
+
+      };
+
+      reader.readAsDataURL(file);
+
+    }
+
+
+    /*
+      HAPUS BACKGROUND
+    */
+
+    function hapusBackground() {
+
+      delete data.background;
+
+      document.body.style.backgroundImage =
+        "none";
+
+      simpan();
+
+    }
+
+
+    /*
+      UBAH BACKGROUND HERO
+    */
+
+    function ubahHero(event) {
+
+      const file =
+        event.target.files[0];
+
+      if (!file) return;
+
+      const reader =
+        new FileReader();
+
+      reader.onload = function(e) {
+
+        data.hero =
+          e.target.result;
+
+        document.getElementById("hero")
+          .style.backgroundImage =
+          `url("${data.hero}")`;
+
+        document.getElementById("hero")
+          .style.backgroundSize =
+          "cover";
+
+        document.getElementById("hero")
+          .style.backgroundPosition =
+          "center";
+
+        document.getElementById("hero")
+          .style.borderRadius =
+          "20px";
+
+        simpan();
+
+      };
+
+      reader.readAsDataURL(file);
+
+    }
+
+
+    /*
+      UBAH FOTO ANGGOTA
+    */
+
+    function ubahFoto(event, nomor) {
+
+      const file =
+        event.target.files[0];
+
+      if (!file) return;
+
+      const reader =
+        new FileReader();
+
+      reader.onload = function(e) {
+
+        data["foto" + nomor] =
+          e.target.result;
+
+        const foto =
+          document.getElementById(
+            "foto" + nomor
+          );
+
+        foto.src =
+          data["foto" + nomor];
+
+        foto.classList.remove("hidden");
+
+        simpan();
+
+      };
+
+      reader.readAsDataURL(file);
+
+    }
+
+
+    /*
+      ISI PANEL DENGAN DATA TERSIMPAN
+    */
+
+    function tampilkanData() {
+
+      document.getElementById("judulInput")
+        .value = data.judul;
+
+      document.getElementById("deskripsiInput")
+        .value = data.deskripsi;
+
+      document.getElementById("materiJudulInput")
+        .value = data.materiJudul;
+
+      document.getElementById("warnaTema")
+        .value = data.warna;
+
+
+      /*
+        Isi nama anggota
+      */
+
+      for (let i = 1; i <= 5; i++) {
+
+        document.getElementById(
+          "nama" + i + "Input"
+        ).value =
+          data["nama" + i];
+
+        document.getElementById(
+          "absen" + i + "Input"
+        ).value =
+          data["absen" + i];
+
+
+        /*
+          Tampilkan foto kalau sudah ada
+        */
+
+        if (data["foto" + i]) {
+
+          const foto =
+            document.getElementById(
+              "foto" + i
+            );
+
+          foto.src =
+            data["foto" + i];
+
+          foto.classList.remove("hidden");
+
         }
 
-        const foto = document.getElementById(idFoto);
+      }
 
-        // Membuat URL sementara dari foto yang dipilih
-        foto.src = URL.createObjectURL(file);
 
-        // Menampilkan foto
-        foto.classList.remove("hidden");
+      /*
+        Terapkan data ke website
+      */
+
+      document.getElementById("judulWebsite")
+        .innerText = data.judul;
+
+      document.getElementById("deskripsiWebsite")
+        .innerText = data.deskripsi;
+
+      document.getElementById("materiJudul")
+        .innerText = data.materiJudul;
+
+
+      /*
+        Background website
+      */
+
+      if (data.background) {
+
+        document.body.style.backgroundImage =
+          `url("${data.background}")`;
+
+      }
+
+
+      /*
+        Background hero
+      */
+
+      if (data.hero) {
+
+        document.getElementById("hero")
+          .style.backgroundImage =
+          `url("${data.hero}")`;
+
+        document.getElementById("hero")
+          .style.backgroundSize =
+          "cover";
+
+        document.getElementById("hero")
+          .style.backgroundPosition =
+          "center";
+
+        document.getElementById("hero")
+          .style.borderRadius =
+          "20px";
+
+      }
+
+
+      /*
+        Nama dan absen
+      */
+
+      for (let i = 1; i <= 5; i++) {
+
+        document.getElementById(
+          "nama" + i
+        ).innerText =
+          data["nama" + i];
+
+        document.getElementById(
+          "absen" + i
+        ).innerText =
+          data["absen" + i];
+
       }
 
     }
 
+
+    /*
+      RESET WEBSITE
+    */
+
+    function resetWebsite() {
+
+      const yakin =
+        confirm(
+          "Yakin ingin menghapus semua perubahan?"
+        );
+
+      if (!yakin) return;
+
+      localStorage.removeItem(
+        "websitePKN"
+      );
+
+      location.reload();
+
+    }
+
+
+    /*
+      JALANKAN SAAT WEBSITE DIBUKA
+    */
+
+    tampilkanData();
+
   </script>
+
 
 </body>
 </html>

@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tugas PKn: Mengamalkan Nilai Pancasila</title>
+
+  <title>Tugas PKn - Nilai Pancasila</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
-    /* ==================================================
-       BACKGROUND WEBSITE
-       GANTI NAMA FILE DI SINI JIKA INGIN GANTI BACKGROUND
-       Contoh: background.jpg / bg.png
-       Pastikan file gambar berada di folder yang sama
-       dengan HTML ini.
-       ================================================== */
+
+    /* =========================
+       BACKGROUND
+       ========================= */
+
     body {
       background-image: url("background.jpg");
       background-size: cover;
@@ -24,313 +24,1059 @@
       min-height: 100vh;
     }
 
-    /* Lapisan agar background tetap terlihat tetapi isi mudah dibaca */
+
+    /* =========================
+       CONTENT
+       ========================= */
+
     .content-section {
       background: rgba(255, 255, 255, 0.90);
       backdrop-filter: blur(2px);
     }
 
-    /* ==================================================
-       SLIDER FOTO SILA
-       ================================================== */
+
+    /* =========================
+       KOTAK SILA
+       ========================= */
+
+    .sila-card {
+      background: white;
+      padding: 24px;
+      border-radius: 16px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+      transition: transform 0.3s ease,
+                  box-shadow 0.3s ease;
+    }
+
+    .sila-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+
+
+    /* =========================
+       SLIDER
+       ========================= */
+
     .sila-photo {
       margin-top: 20px;
-      overflow: hidden;
-      border-radius: 14px;
+      width: 100%;
     }
+
 
     .sila-slider {
-      position: relative;
+      display: flex;
+
       width: 100%;
-      aspect-ratio: 16 / 9;
-      overflow: hidden;
+
+      overflow-x: auto;
+
+      scroll-snap-type: x mandatory;
+
+      scroll-behavior: smooth;
+
       border-radius: 14px;
-      background: #e2e8f0;
+
+      cursor: grab;
+
+      scrollbar-width: none;
+
+      -webkit-overflow-scrolling: touch;
+
+      user-select: none;
     }
+
+
+    .sila-slider:active {
+      cursor: grabbing;
+    }
+
+
+    .sila-slider::-webkit-scrollbar {
+      display: none;
+    }
+
+
+    /* =========================
+       FOTO PORTRAIT
+       ========================= */
 
     .sila-slide {
-      position: absolute;
-      inset: 0;
+      flex: 0 0 100%;
+
       width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0;
-      transition: opacity 0.5s ease;
+
+      aspect-ratio: 3 / 4;
+
+      object-fit: contain;
+
+      scroll-snap-align: center;
+
+      border-radius: 14px;
+
+      background: #e2e8f0;
+
+      display: block;
     }
 
-    .sila-slide.active {
-      opacity: 1;
-    }
 
-    /* Titik indikator slider */
+    /* =========================
+       TITIK SLIDER
+       ========================= */
+
     .sila-dots {
       display: flex;
+
       justify-content: center;
-      gap: 6px;
+
+      align-items: center;
+
+      gap: 7px;
+
       margin-top: 10px;
     }
 
+
     .sila-dot {
       width: 8px;
+
       height: 8px;
-      border-radius: 999px;
+
+      border-radius: 50%;
+
       background: #cbd5e1;
+
       transition: all 0.3s ease;
+
+      cursor: pointer;
     }
 
+
     .sila-dot.active {
-      width: 20px;
+      width: 10px;
+
+      height: 10px;
+
       background: #ef4444;
     }
+
   </style>
+
 </head>
+
 
 <body class="text-slate-800 font-sans antialiased">
 
-  <!-- HEADER -->
-  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-100">
-    <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
-      <span class="font-bold text-lg text-red-600 tracking-wide">PKN EDU</span>
 
-      <nav class="space-x-6 text-sm font-medium">
-        <a href="#materi" class="hover:text-red-600 transition-colors">Materi</a>
-        <a href="#studi-kasus" class="hover:text-red-600 transition-colors">Implementasi</a>
-        <a href="#anggota" class="hover:text-red-600 transition-colors">Kelompok</a>
-      </nav>
-    </div>
-  </header>
+  <!-- =========================
+       HEADER
+       ========================= -->
 
-  <!-- HERO -->
-  <section id="hero" class="max-w-5xl mx-auto px-6 py-16 md:py-24 text-center">
-    <div class="content-section rounded-2xl p-8 md:p-12 shadow-sm">
-      <span class="inline-block bg-red-100 text-red-700 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider mb-4">
-        Tugas Pendidikan Kewarganegaraan
+  <header
+    class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-100">
+
+    <div
+      class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+
+      <span
+        class="font-bold text-lg text-red-600 tracking-wide">
+
+        PKN EDU
+
       </span>
 
-      <h1 id="judulWebsite" class="text-3xl md:text-5xl font-extrabold text-slate-900 leading-tight mb-4">
+
+      <nav class="space-x-6 text-sm font-medium">
+
+        <a
+          href="#materi"
+          class="hover:text-red-600 transition">
+
+          Materi
+
+        </a>
+
+
+        <a
+          href="#studi-kasus"
+          class="hover:text-red-600 transition">
+
+          Implementasi
+
+        </a>
+
+
+        <a
+          href="#anggota"
+          class="hover:text-red-600 transition">
+
+          Kelompok
+
+        </a>
+
+      </nav>
+
+    </div>
+
+  </header>
+
+
+
+  <!-- =========================
+       HERO
+       ========================= -->
+
+  <section
+    class="max-w-5xl mx-auto px-6 py-16 md:py-24 text-center">
+
+    <div
+      class="content-section rounded-2xl p-8 md:p-12 shadow-sm">
+
+
+      <span
+        class="inline-block bg-red-100 text-red-700 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider mb-4">
+
+        Tugas Pendidikan Kewarganegaraan
+
+      </span>
+
+
+      <h1
+        class="text-3xl md:text-5xl font-extrabold text-slate-900 leading-tight mb-4">
+
         Revitalisasi Nilai Pancasila di Era Digital
+
       </h1>
 
-      <p id="deskripsiWebsite" class="max-w-2xl mx-auto text-slate-600 text-base md:text-lg mb-8">
+
+      <p
+        class="max-w-2xl mx-auto text-slate-600 text-base md:text-lg mb-8">
+
         Menjaga integritas, toleransi, dan persatuan bangsa melalui penerapan sila-sila Pancasila dalam interaksi daring maupun luring.
+
       </p>
 
-      <a href="#materi"
-         class="inline-block bg-red-600 text-white font-medium px-6 py-3 rounded-lg shadow hover:bg-red-700 transition">
+
+      <a
+        href="#materi"
+        class="inline-block bg-red-600 text-white font-medium px-6 py-3 rounded-lg shadow hover:bg-red-700 transition">
+
         Pelajari Selengkapnya
+
       </a>
+
     </div>
+
   </section>
 
-  <!-- MATERI -->
-  <section id="materi" class="max-w-5xl mx-auto px-6 py-12">
-    <div class="content-section rounded-2xl p-6 md:p-8 shadow-sm">
-      <div class="border-b pb-4 mb-8">
-        <h2 id="materiJudul" class="text-2xl font-bold text-slate-900">
+
+
+  <!-- =========================
+       MATERI
+       ========================= -->
+
+  <section
+    id="materi"
+    class="max-w-5xl mx-auto px-6 py-12">
+
+    <div
+      class="content-section rounded-2xl p-6 md:p-8 shadow-sm">
+
+
+      <div
+        class="border-b pb-4 mb-8">
+
+        <h2
+          class="text-2xl font-bold text-slate-900">
+
           Pilar Utama Nilai PKn
+
         </h2>
-        <p class="text-slate-500 text-sm mt-2">
+
+
+        <p
+          class="text-slate-500 text-sm mt-2">
+
           Prinsip dasar pembentukan karakter warga negara yang bertanggung jawab.
+
         </p>
+
       </div>
 
-      <div class="grid md:grid-cols-3 gap-6">
 
-        <!-- SILA 1 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-          <div class="w-10 h-10 rounded-lg bg-red-100 text-red-600 flex items-center justify-center font-bold mb-4">
+
+      <!-- =========================
+           GRID SILA
+           ========================= -->
+
+      <div
+        class="grid md:grid-cols-2 gap-6">
+
+
+
+        <!-- =========================
+             SILA 1
+             ========================= -->
+
+        <div class="sila-card">
+
+          <div
+            class="w-10 h-10 rounded-lg bg-red-100 text-red-600 flex items-center justify-center font-bold mb-4">
+
             1
+
           </div>
 
-          <h3 class="font-bold text-lg mb-2">
+
+          <h3
+            class="font-bold text-lg mb-2">
+
             Sila Pertama
+
           </h3>
 
-          <p class="text-slate-600 text-sm leading-relaxed">
+
+          <p
+            class="text-slate-600 text-sm leading-relaxed">
+
             Mengimplementasikan Sila Pertama dengan menghargai kebebasan beribadah dan membangun ruang dialog damai antarkeyakinan.
-          </p>
-        </div>
 
-        <!-- SILA 2 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-          <div class="w-10 h-10 rounded-lg bg-red-100 text-red-600 flex items-center justify-center font-bold mb-4">
-            2
-          </div>
-
-          <h3 class="font-bold text-lg mb-2">
-            Sila Kedua
-          </h3>
-
-          <p class="text-slate-600 text-sm leading-relaxed">
-            Mencegah penyebaran hoaks, menjaga adab bermedia sosial, dan memperlakukan sesama warganet secara adil dan beradab.
-          </p>
-        </div>
-
-        <!-- SILA 3 + SLIDER FOTO -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-          <div class="w-10 h-10 rounded-lg bg-red-100 text-red-600 flex items-center justify-center font-bold mb-4">
-            3
-          </div>
-
-          <h3 class="font-bold text-lg mb-2">
-            Sila Ketiga
-          </h3>
-
-          <p class="text-slate-600 text-sm leading-relaxed">
-            Menggalang kepedulian sosial melalui aksi kolektif, urun daya digital, dan gerakan kepedulian lingkungan hidup.
           </p>
 
-          <!-- KODE SLIDER YANG KAMU KIRIM -->
+
+          <!-- SLIDER -->
+
           <div class="sila-photo">
-            <div class="sila-slider">
-              <img src="sila3.jpeg"
-                   class="sila-slide active"
-                   alt="Sila 3 - Foto 1">
 
-              <img src="sila3-2.jpeg"
-                   class="sila-slide"
-                   alt="Sila 3 - Foto 2">
+            <div
+              class="sila-slider">
 
-              <img src="sila3-3.jpeg"
-                   class="sila-slide"
-                   alt="Sila 3 - Foto 3">
+
+              <img
+                src="sila1.jpeg"
+                class="sila-slide"
+                alt="Sila 1 Foto 1">
+
+
+              <img
+                src="sila1-2.jpeg"
+                class="sila-slide"
+                alt="Sila 1 Foto 2">
+
+
             </div>
 
-            <div class="sila-dots" aria-hidden="true">
-              <span class="sila-dot active"></span>
-              <span class="sila-dot"></span>
-              <span class="sila-dot"></span>
+
+            <div class="sila-dots">
+
+              <span
+                class="sila-dot active">
+              </span>
+
+              <span
+                class="sila-dot">
+              </span>
+
+              <span
+                class="sila-dot">
+              </span>
+
             </div>
+
           </div>
+
         </div>
+
+
+
+        <!-- =========================
+             SILA 2
+             ========================= -->
+
+        <div class="sila-card">
+
+          <div
+            class="w-10 h-10 rounded-lg bg-red-100 text-red-600 flex items-center justify-center font-bold mb-4">
+
+            2
+
+          </div>
+
+
+          <h3
+            class="font-bold text-lg mb-2">
+
+            Sila Kedua
+
+          </h3>
+
+
+          <p
+            class="text-slate-600 text-sm leading-relaxed">
+
+            Mencegah penyebaran hoaks, menjaga adab bermedia sosial, dan memperlakukan sesama warganet secara adil dan beradab.
+
+          </p>
+
+
+          <!-- SLIDER -->
+
+          <div class="sila-photo">
+
+            <div class="sila-slider">
+
+
+              <img
+                src="sila2.jpeg"
+                class="sila-slide"
+                alt="Sila 2 Foto 1">
+
+
+              <img
+                src="sila2-2.jpeg"
+                class="sila-slide"
+                alt="Sila 2 Foto 2">
+
+
+
+            </div>
+
+
+            <div class="sila-dots">
+
+              <span
+                class="sila-dot active">
+              </span>
+
+              <span
+                class="sila-dot">
+              </span>
+
+              <span
+                class="sila-dot">
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- =========================
+             SILA 3
+             ========================= -->
+
+        <div class="sila-card">
+
+          <div
+            class="w-10 h-10 rounded-lg bg-red-100 text-red-600 flex items-center justify-center font-bold mb-4">
+
+            3
+
+          </div>
+
+
+          <h3
+            class="font-bold text-lg mb-2">
+
+            Sila Ketiga
+
+          </h3>
+
+
+          <p
+            class="text-slate-600 text-sm leading-relaxed">
+
+            Menggalang kepedulian sosial melalui aksi kolektif, urun daya digital, dan gerakan kepedulian lingkungan hidup.
+
+          </p>
+
+
+          <!-- SLIDER -->
+
+          <div class="sila-photo">
+
+            <div class="sila-slider">
+
+
+              <img
+                src="sila3.jpeg"
+                class="sila-slide"
+                alt="Sila 3 Foto 1">
+
+
+              <img
+                src="sila3-2.jpeg"
+                class="sila-slide"
+                alt="Sila 3 Foto 2">
+
+
+            </div>
+
+
+            <div class="sila-dots">
+
+              <span
+                class="sila-dot active">
+              </span>
+
+              <span
+                class="sila-dot">
+              </span>
+
+              <span
+                class="sila-dot">
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- =========================
+             SILA 4
+             ========================= -->
+
+        <div class="sila-card">
+
+          <div
+            class="w-10 h-10 rounded-lg bg-red-100 text-red-600 flex items-center justify-center font-bold mb-4">
+
+            4
+
+          </div>
+
+
+          <h3
+            class="font-bold text-lg mb-2">
+
+            Sila Keempat
+
+          </h3>
+
+
+          <p
+            class="text-slate-600 text-sm leading-relaxed">
+
+            Mengutamakan musyawarah, menghargai pendapat orang lain, dan mengambil keputusan secara bersama.
+
+          </p>
+
+
+          <!-- SLIDER -->
+
+          <div class="sila-photo">
+
+            <div class="sila-slider">
+
+
+              <img
+                src="sila4.jpeg"
+                class="sila-slide"
+                alt="Sila 4 Foto 1">
+
+            </div>
+
+
+            <div class="sila-dots">
+
+              <span
+                class="sila-dot active">
+              </span>
+
+              <span
+                class="sila-dot">
+              </span>
+
+              <span
+                class="sila-dot">
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- =========================
+             SILA 5
+             ========================= -->
+
+        <div class="sila-card">
+
+          <div
+            class="w-10 h-10 rounded-lg bg-red-100 text-red-600 flex items-center justify-center font-bold mb-4">
+
+            5
+
+          </div>
+
+
+          <h3
+            class="font-bold text-lg mb-2">
+
+            Sila Kelima
+
+          </h3>
+
+
+          <p
+            class="text-slate-600 text-sm leading-relaxed">
+
+            Menerapkan keadilan, menghargai hak orang lain, dan membantu menciptakan kesejahteraan bersama.
+
+          </p>
+
+
+          <!-- SLIDER -->
+
+          <div class="sila-photo">
+
+            <div class="sila-slider">
+
+
+              <img
+                src="sila5.jpeg"
+                class="sila-slide"
+                alt="Sila 5 Foto 1">
+
+
+            </div>
+
+
+            <div class="sila-dots">
+
+              <span
+                class="sila-dot active">
+              </span>
+
+              <span
+                class="sila-dot">
+              </span>
+
+              <span
+                class="sila-dot">
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
 
       </div>
+
     </div>
+
   </section>
 
-  <!-- STUDI KASUS -->
-  <section id="studi-kasus" class="py-12">
-    <div class="max-w-5xl mx-auto px-6">
-      <div class="content-section rounded-2xl p-6 md:p-8 shadow-sm">
-        <div class="border-b border-slate-200 pb-4 mb-6">
-          <h2 class="text-2xl font-bold text-slate-900">
+
+
+  <!-- =========================
+       STUDI KASUS
+       ========================= -->
+
+  <section
+    id="studi-kasus"
+    class="py-12">
+
+    <div
+      class="max-w-5xl mx-auto px-6">
+
+      <div
+        class="content-section rounded-2xl p-6 md:p-8 shadow-sm">
+
+
+        <div
+          class="border-b border-slate-200 pb-4 mb-6">
+
+          <h2
+            class="text-2xl font-bold text-slate-900">
+
             Analisis Studi Kasus Singkat
+
           </h2>
 
-          <p class="text-slate-500 text-sm mt-2">
+
+          <p
+            class="text-slate-500 text-sm mt-2">
+
             Contoh penerapan solusi berbasis nilai kewarganegaraan.
+
           </p>
+
         </div>
 
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
-          <h4 class="font-semibold text-slate-800">
+
+        <div
+          class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
+
+          <h4
+            class="font-semibold text-slate-800">
+
             Tantangan: Polarisasi Opini di Media Sosial
+
           </h4>
 
-          <p class="text-slate-600 text-sm leading-relaxed">
+
+          <p
+            class="text-slate-600 text-sm leading-relaxed">
+
             Perbedaan pandangan politik sering kali memicu perpecahan online.
             Solusi kewarganegaraan berfokus pada penguatan
-            <em>literasi digital</em> berbasis Sila Ketiga (Persatuan Indonesia),
-            di mana setiap individu mengedepankan verifikasi data dan komunikasi
-            tanpa ujaran kebencian.
+            <em>literasi digital</em> berbasis Sila Ketiga
+            (Persatuan Indonesia), di mana setiap individu mengedepankan
+            verifikasi data dan komunikasi tanpa ujaran kebencian.
+
           </p>
+
         </div>
+
       </div>
+
     </div>
+
   </section>
 
-  <!-- ANGGOTA -->
-  <section id="anggota" class="max-w-5xl mx-auto px-6 py-12">
-    <div class="content-section rounded-2xl p-6 md:p-8 shadow-sm">
-      <div class="border-b pb-4 mb-8">
-        <h2 class="text-2xl font-bold text-slate-900">
+
+
+  <!-- =========================
+       ANGGOTA KELOMPOK
+       ========================= -->
+
+  <section
+    id="anggota"
+    class="max-w-5xl mx-auto px-6 py-12">
+
+    <div
+      class="content-section rounded-2xl p-6 md:p-8 shadow-sm">
+
+
+      <div
+        class="border-b pb-4 mb-8">
+
+        <h2
+          class="text-2xl font-bold text-slate-900">
+
           Anggota Kelompok
+
         </h2>
-      </div>
-
-      <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-
-        <!-- ARIF -->
-        <div class="p-4 rounded-lg bg-white border border-slate-200 shadow-sm text-center">
-          <img id="foto1"
-               class="w-24 h-24 mx-auto mb-3 rounded-full object-cover border-4 border-red-100 hidden"
-               alt="Foto Arif">
-          <p id="nama1" class="font-bold text-slate-800 text-sm">Arif Rohman</p>
-          <span id="absen1" class="text-xs text-slate-500">NIS / No. Absen 07</span>
-        </div>
-
-        <!-- AZYUAN -->
-        <div class="p-4 rounded-lg bg-white border border-slate-200 shadow-sm text-center">
-          <img id="foto2"
-               class="w-24 h-24 mx-auto mb-3 rounded-full object-cover border-4 border-red-100 hidden"
-               alt="Foto Azyuan">
-          <p id="nama2" class="font-bold text-slate-800 text-sm">Azyuan Syahril</p>
-          <span id="absen2" class="text-xs text-slate-500">NIS / No. Absen 10</span>
-        </div>
-
-        <!-- BRILIAN -->
-        <div class="p-4 rounded-lg bg-white border border-slate-200 shadow-sm text-center">
-          <img id="foto3"
-               class="w-24 h-24 mx-auto mb-3 rounded-full object-cover border-4 border-red-100 hidden"
-               alt="Foto Brilian">
-          <p id="nama3" class="font-bold text-slate-800 text-sm">Brilian zaki</p>
-          <span id="absen3" class="text-xs text-slate-500">NIS / No. Absen 12</span>
-        </div>
-
-        <!-- CARRISA -->
-        <div class="p-4 rounded-lg bg-white border border-slate-200 shadow-sm text-center">
-          <img id="foto4"
-               class="w-24 h-24 mx-auto mb-3 rounded-full object-cover border-4 border-red-100 hidden"
-               alt="Foto Carrisa">
-          <p id="nama4" class="font-bold text-slate-800 text-sm">Carrisa Zaynah A.</p>
-          <span id="absen4" class="text-xs text-slate-500">NIS / No. Absen 13</span>
-        </div>
-
-        <!-- NISA -->
-        <div class="p-4 rounded-lg bg-white border border-slate-200 shadow-sm text-center">
-          <img id="foto5"
-               class="w-24 h-24 mx-auto mb-3 rounded-full object-cover border-4 border-red-100 hidden"
-               alt="Foto Nisa">
-          <p id="nama5" class="font-bold text-slate-800 text-sm">Nisa Maesaroh</p>
-          <span id="absen5" class="text-xs text-slate-500">NIS / No. Absen 30</span>
-        </div>
 
       </div>
+
+
+      <div
+        class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+
+
+        <div
+          class="p-4 rounded-lg bg-white border border-slate-200 shadow-sm text-center">
+
+          <p
+            class="font-bold text-slate-800 text-sm">
+
+            Arif Rohman
+
+          </p>
+
+          <span
+            class="text-xs text-slate-500">
+
+            NIS / No. Absen 07
+
+          </span>
+
+        </div>
+
+
+        <div
+          class="p-4 rounded-lg bg-white border border-slate-200 shadow-sm text-center">
+
+          <p
+            class="font-bold text-slate-800 text-sm">
+
+            Azyuan Syahril
+
+          </p>
+
+          <span
+            class="text-xs text-slate-500">
+
+            NIS / No. Absen 10
+
+          </span>
+
+        </div>
+
+
+        <div
+          class="p-4 rounded-lg bg-white border border-slate-200 shadow-sm text-center">
+
+          <p
+            class="font-bold text-slate-800 text-sm">
+
+            Brilian zaki
+
+          </p>
+
+          <span
+            class="text-xs text-slate-500">
+
+            NIS / No. Absen 12
+
+          </span>
+
+        </div>
+
+
+        <div
+          class="p-4 rounded-lg bg-white border border-slate-200 shadow-sm text-center">
+
+          <p
+            class="font-bold text-slate-800 text-sm">
+
+            Carrisa Zaynah A.
+
+          </p>
+
+          <span
+            class="text-xs text-slate-500">
+
+            NIS / No. Absen 13
+
+          </span>
+
+        </div>
+
+
+        <div
+          class="p-4 rounded-lg bg-white border border-slate-200 shadow-sm text-center">
+
+          <p
+            class="font-bold text-slate-800 text-sm">
+
+            Nisa Maesaroh
+
+          </p>
+
+          <span
+            class="text-xs text-slate-500">
+
+            NIS / No. Absen 30
+
+          </span>
+
+        </div>
+
+
+      </div>
+
     </div>
+
   </section>
 
-  <!-- FOOTER -->
-  <footer class="bg-slate-900 text-slate-400 py-6 text-center text-xs">
-    <p>Tugas Pendidikan Kewarganegaraan</p>
+
+
+  <!-- =========================
+       FOOTER
+       ========================= -->
+
+  <footer
+    class="bg-slate-900 text-slate-400 py-6 text-center text-xs">
+
+    <p>
+      Tugas Pendidikan Kewarganegaraan
+    </p>
+
   </footer>
 
-  <!-- ==================================================
-       JAVASCRIPT SLIDER FOTO SILA 3
-       ================================================== -->
+
+
+  <!-- =========================
+       JAVASCRIPT SLIDER
+       ========================= -->
+
   <script>
-    const silaSlides = document.querySelectorAll(".sila-slide");
-    const silaDots = document.querySelectorAll(".sila-dot");
-    let silaIndex = 0;
 
-    function tampilkanSilaSlide(index) {
-      silaSlides.forEach((slide, i) => {
-        slide.classList.toggle("active", i === index);
+    document
+      .querySelectorAll(".sila-photo")
+      .forEach((container) => {
+
+
+        const slider =
+          container.querySelector(".sila-slider");
+
+
+        const slides =
+          container.querySelectorAll(".sila-slide");
+
+
+        const dots =
+          container.querySelectorAll(".sila-dot");
+
+
+        let index = 0;
+
+        let autoSlide;
+
+
+
+        /* =====================
+           PINDAH SLIDE
+           ===================== */
+
+        function goToSlide(i) {
+
+          index = i;
+
+
+          slider.scrollTo({
+
+            left:
+              slider.clientWidth * index,
+
+            behavior: "smooth"
+
+          });
+
+
+          updateDots();
+
+        }
+
+
+
+        /* =====================
+           UPDATE TITIK
+           ===================== */
+
+        function updateDots() {
+
+          dots.forEach((dot, i) => {
+
+            dot.classList.toggle(
+              "active",
+              i === index
+            );
+
+          });
+
+        }
+
+
+
+        /* =====================
+           OTOMATIS 3 DETIK
+           ===================== */
+
+        function startAutoSlide() {
+
+          autoSlide =
+            setInterval(() => {
+
+
+              index++;
+
+
+              if (
+                index >= slides.length
+              ) {
+
+                index = 0;
+
+              }
+
+
+              goToSlide(index);
+
+
+            }, 3000);
+
+        }
+
+
+
+        /* =====================
+           KLIK TITIK
+           ===================== */
+
+        dots.forEach((dot, i) => {
+
+          dot.addEventListener(
+            "click",
+            () => {
+
+
+              clearInterval(
+                autoSlide
+              );
+
+
+              goToSlide(i);
+
+
+              startAutoSlide();
+
+            }
+          );
+
+        });
+
+
+
+        /* =====================
+           DETEKSI GESER
+           ===================== */
+
+        slider.addEventListener(
+          "scroll",
+          () => {
+
+
+            const newIndex =
+              Math.round(
+                slider.scrollLeft /
+                slider.clientWidth
+              );
+
+
+            if (
+              newIndex !== index
+            ) {
+
+              index = newIndex;
+
+              updateDots();
+
+            }
+
+          }
+        );
+
+
+
+        /* =====================
+           MULAI OTOMATIS
+           ===================== */
+
+        startAutoSlide();
+
+
       });
 
-      silaDots.forEach((dot, i) => {
-        dot.classList.toggle("active", i === index);
-      });
-    }
-
-    function nextSilaSlide() {
-      silaIndex = (silaIndex + 1) % silaSlides.length;
-      tampilkanSilaSlide(silaIndex);
-    }
-
-    if (silaSlides.length > 1) {
-      setInterval(nextSilaSlide, 3000);
-    }
   </script>
 
+
 </body>
+
 </html>
